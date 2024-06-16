@@ -211,6 +211,22 @@ node* CreateList(node* head)
     return head;
 }
 
+node* ReversingList(node* head)
+{
+    node *prev = NULL;
+    node* next = NULL;
+
+    while(head != NULL)
+    {
+        next = head->link;
+        head->link = prev;
+        prev = head;
+        head = next;
+    }
+    head = prev;
+    return head;
+}
+
 int main()
 {
     node* head = (node*)malloc(sizeof(node));
@@ -228,9 +244,10 @@ int main()
         printf("Enter 5 to delete a node from the end\n");
         printf("Enter 6 to delete a node in between\n");
         printf("Enter 7 to delete the whole linked list\n");
-        printf("Enter 8 to count the total nubmer of nodes in the list\n");
-        printf("Enter 9 to display the list\n");
-        printf("Enter 10 to exit\n");
+        printf("Enter 8 to reverse the linked list\n");
+        printf("Enter 9 to count the total nubmer of nodes in the list\n");
+        printf("Enter 10 to display the list\n");
+        printf("Enter 11 to exit\n");
 
         printf("Enter your option- ");
         scanf("%d", &op);
@@ -270,14 +287,18 @@ int main()
             break;
 
             case 8:
-            CountNodes(head);
+            head = ReversingList(head);
             break;
 
             case 9:
-            PrintData(head);
+            CountNodes(head);
             break;
 
             case 10:
+            PrintData(head);
+            break;
+
+            case 11:
             exit(1);
             break;
 
