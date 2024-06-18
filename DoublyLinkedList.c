@@ -40,7 +40,6 @@ node* InsertAtBeginning(node *head, int val)
     {
         head->prev = ptr;
     }
-    
     head = ptr;
     
     return head;
@@ -144,6 +143,75 @@ node* InsertInBetween(node* head, int pos, int val)
 }
 */
 
+node* DeleteFromBeginning(node* head)
+{
+    if(head == NULL)
+    {
+        printf("Linked list is empty!\n");
+    }
+    else
+    {
+        node* ptr = head;
+        head = head->next;
+        free(ptr);
+        ptr = NULL;
+        head->prev = NULL;
+    }
+    return head;  
+}
+
+node* DeleteFromEnd(node* head)
+{
+    if(head == NULL)
+    {
+        printf("Linked list is already empty!");
+    }
+    else
+    {
+        node* ptr = head;
+        while(ptr->next->next != NULL)
+        {
+            ptr = ptr->next;
+        }
+        free(ptr->next);
+        ptr->next = NULL;
+    }
+    return head;
+}
+
+node* DeletionInBetween(node* head, int pos)
+{
+    int c = count(head);
+
+    if(pos == 1)
+    {
+        head = DeleteFromBeginning(head);
+    }
+
+    else if(pos == c)
+    {
+        head = DeleteFromEnd(head);
+    }
+
+    else
+    {
+        node* ptr1 = head;
+        node* ptr2 = NULL;
+
+        while(pos != 1)
+        {
+            ptr2 = ptr1;
+            ptr1 = ptr1->next;
+            pos--;
+        }
+        ptr2->next = ptr1->next;
+        free(ptr1);
+        ptr1 = NULL;
+        ptr2->next->prev = ptr2;
+    }
+    return head;
+}
+
 void display(node* head)
 {
     node* ptr = head;
@@ -187,14 +255,20 @@ int main()
     head = CreateList(head);
 
     int op, val, c, pos;
+
+    c = count(head);
+
     while(1)
     {
         printf("Enter 1 to Insert a node at beginning\n");
         printf("Enter 2 to Insert a node at the end\n");
         printf("Enter 3 to Insert a node in between two nodes\n");
-        printf("Enter 4 to display the list\n");
-        printf("Enter 5 to count the total nubmer of nodes in the list\n");
-        printf("Enter 6 to exit\n");
+        printf("Enter 4 to delete the node from beginning\n");
+        printf("Enter 5 to delete the node from the end\n");
+        printf("Enter 6 to Delete the node in between\n");
+        printf("Enter 7 to display the list\n");
+        printf("Enter 8 to count the total nubmer of nodes in the list\n");
+        printf("Enter 9 to exit\n");
 
         printf("Enter your option- ");
         scanf("%d", &op);
@@ -237,15 +311,38 @@ int main()
             break;
 
             case 4:
-            display(head);
+            head = DeleteFromBeginning(head);
             break;
 
             case 5:
+            head = DeleteFromEnd(head);
+            break;
+
+            case 6:
+            printf("Enter the position from which you want to delete the node: ");
+            scanf("%d", &pos);
+
+            if(pos > c || pos < 1)
+            {
+                printf("Invalid position\n");
+            }
+
+            else
+            {
+                head = DeletionInBetween(head, pos);
+            }
+            break;
+
+            case 7:
+            display(head);
+            break;
+
+            case 8:
             c = count(head);
             printf("Total number of nodes in the list are: %d", c);
             break;
 
-            case 6:
+            case 9:
             exit(1);
 
             default:
