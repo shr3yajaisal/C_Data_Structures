@@ -31,13 +31,18 @@ node* AddToEmpty(node *head, int val)
 
 node* InsertAtBeginning(node *head, int val)
 {
-    node* temp = (node*)malloc(sizeof(node));
-    temp->prev = NULL;
-    temp->data = val;
-    temp->next = NULL;
-    temp->next = head;
-    head->prev = temp;
-    head = temp;
+    node* ptr = (node*)malloc(sizeof(node));
+    ptr->prev = NULL;
+    ptr->data = val;
+    ptr->next = head;
+    
+    if(head != NULL)
+    {
+        head->prev = ptr;
+    }
+    
+    head = ptr;
+    
     return head;
 }
 
@@ -54,12 +59,16 @@ node* InsertAtEnd(node *head, int val)
         ptr = ptr->next;
     }
     ptr->next = temp;
-    temp->prev = ptr;
+    temp->prev = ptr;   
     return head;
+    
 }
 
+// METHON FOR INSERTION IN BETWEEN (USING ONE POINTER)
 node* InsertInBetween(node* head, int pos, int val)
 {
+    int c = count(head);
+
     node *temp = (node*)malloc(sizeof(node));
     temp->prev = NULL;
     temp->data = val;
@@ -67,20 +76,73 @@ node* InsertInBetween(node* head, int pos, int val)
 
     node* ptr = head;
 
-    pos--;
-    while(pos != 1)
+    if(pos == 1)
     {
-        ptr = ptr->next;
+        head = InsertAtBeginning(head, val);
+    }
+
+    else if(pos == c+1)
+    {
+        head = InsertAtEnd(head, val);
+    }
+
+    else
+    {
         pos--;
+        while(pos != 1)
+        {
+            ptr = ptr->next;
+            pos--;
+        }
+
+        temp->next = ptr->next;
+        ptr->next->prev = temp;
+        ptr->next = temp;
+        temp->prev = ptr;
     }
  
-    temp->next = ptr->next;
-    ptr->next->prev = temp;
-    ptr->next = temp;
-    temp->prev = ptr;
-    
     return head;
 }
+
+/*ALTERNATIVE METHOD FOR INSERTION IN BETWEEN (USING TWO POINTERS)
+
+node* InsertInBetween(node* head, int pos, int val)
+{
+    node* ptr = NULL;
+    node* temp1 = head;
+    node* temp2 = NULL;
+
+    ptr = AddToEmpty(ptr, val);
+
+    while(pos != 1)
+    {
+        temp1 = temp1->next;
+        pos--;
+    }
+
+    if(temp1->next == NULL)
+    {
+        temp1->next = ptr;
+        ptr->prev = temp1;
+    }
+
+    else if(pos == 1)
+    {
+        head = InsertAtBeginning(head, val);
+    }
+
+    else
+    {
+        temp2 = temp1->next;
+        temp1->next = ptr;
+        temp2->prev = ptr;
+        ptr->next = temp2;
+        ptr->prev = temp1;
+    }
+
+    return head;
+}
+*/
 
 void display(node* head)
 {
@@ -98,11 +160,10 @@ node* CreateList(node* head)
     printf("Enter the number of nodes you want to enter: ");
     scanf("%d", &n);
 
-    if(n==0)
+    if(n == 0)
     {
         return head;
     }
-
     else
     {
         printf("Enter the element for node 1: ");
@@ -147,17 +208,32 @@ int main()
             break;
 
             case 2:
-            printf("Enter the element you want to enter at the end: ");
-            scanf("%d", &val);
-            head = InsertAtEnd(head, val);
+            if(head == NULL)
+            {
+                printf("List is empty!\n");
+            }
+            else
+            {
+                printf("Enter the element you want to enter at the end: ");
+                scanf("%d", &val);
+                head = InsertAtEnd(head, val);
+            }
             break;
 
             case 3:
-            printf("Enter the position at which you want to enter the element: ");
-            scanf("%d", &pos);
-            printf("Enter the element you want to enter: ");
-            scanf("%d", &val);
-            head = InsertInBetween(head, pos, val);
+            if(pos < 1 || pos > c)
+            {
+                printf("Invalid position!\n");
+            }
+
+            else
+            {
+                printf("Enter the position at which you want to enter the element: ");
+                scanf("%d", &pos);
+                printf("Enter the element you want to enter: ");
+                scanf("%d", &val);
+                head = InsertInBetween(head, pos, val);
+            }  
             break;
 
             case 4:
