@@ -15,23 +15,17 @@ node* AddToEmpty(node *head, int val)
     return head;
 }
 
-void CountNodes(node *head)
+int CountNodes(node *head)
 {
     int count = 0;
-    if(head == NULL)
+    node *ptr = head;
+    while(ptr != NULL)
     {
-        printf("Linked list is empty!\n");
+        count++;
+        ptr = ptr->link;
     }
-    else
-    {
-        node *ptr = head;
-        while(ptr != NULL)
-        {
-            count++;
-            ptr = ptr->link;
-        }
-        printf("Total number of node are: %d\n", count);
-    }
+
+    return count;
 }
 
 void PrintData(node *head)
@@ -55,9 +49,7 @@ void PrintData(node *head)
 node* InsertAtEnd(node *head, int val)
 {
     node *ptr = head;
-    node *temp;
-
-    temp = (node*)malloc(sizeof(node));
+    node *temp = (node*)malloc(sizeof(node));
     temp->data = val;
     temp->link = NULL;
 
@@ -79,27 +71,37 @@ node* InsertAtBeginning(node *head, int val)
     return head;
 }
 
-void InsertInBetween(node *head)
+node* InsertInBetween(node *head, int pos, int val)
 {
-    int val, pos;
-    printf("Enter the value you want to enter in between: ");
-    scanf("%d", &val);
-    printf("Enter the position at which you want to enter the element: ");
-    scanf("%d", &pos);
+    int c = CountNodes(head);
 
     node *ptr = head;
     node *ptr2 = (node*)malloc(sizeof(node));
     ptr2->data = val;
     ptr2->link = NULL;
 
-    pos--;
-    while(pos != 1)
+    if(pos == 1)
     {
-        ptr = ptr->link;
-        pos--;
+        head = InsertAtBeginning(head, val);
     }
-    ptr2->link = ptr->link;
-    ptr->link = ptr2;
+
+    else if(pos == c+1)
+    {
+        head = InsertAtEnd(head, val);
+    }
+
+    else
+    {
+        pos--;
+        while(pos != 1)
+        {
+            ptr = ptr->link;
+            pos--;
+        }
+        ptr2->link = ptr->link;
+        ptr->link = ptr2;
+    }
+    return head;
 }
 
 void DeleteFromBeginning(node **head)
@@ -234,7 +236,7 @@ int main()
 
     head = CreateList(head);
 
-    int op, val;
+    int c, op, val, pos;
     while(1)
     {
         printf("Enter 1 to Insert a node at beginning\n");
@@ -267,7 +269,19 @@ int main()
             break;
 
             case 3:
-            InsertInBetween(head);
+            printf("Enter the position at which you want to enter the element: ");
+            scanf("%d", &pos);
+            if(pos < 1 || pos > c)
+            {
+                printf("Invalid position!\n");
+            }
+
+            else
+            {
+                printf("Enter the element you want to enter: ");
+                scanf("%d", &val);
+                head = InsertInBetween(head, pos, val);
+            }  
             break;
 
             case 4:
@@ -291,7 +305,8 @@ int main()
             break;
 
             case 9:
-            CountNodes(head);
+            c = CountNodes(head);
+            printf("Total number of node are: %d\n", c);
             break;
 
             case 10:
