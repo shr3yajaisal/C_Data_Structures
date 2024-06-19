@@ -214,20 +214,17 @@ node* DeletionInBetween(node* head, int pos)
 
 node* ReversalOfList(node* head)
 {
-    node* ptr1 = head;
-    node* ptr2 = ptr1->next;
+    node* ptr = head;
+    node* temp = NULL;
 
-    ptr1->next = NULL;
-    ptr1->prev = ptr2;
-
-    while(ptr2 != NULL)
+    while(ptr != NULL)
     {
-        ptr2->prev = ptr2->next;
-        ptr2->next = ptr1;
-        ptr1 = ptr2;
-        ptr2 = ptr2->prev;
+        temp = ptr->next;
+        ptr->next = ptr->prev;
+        ptr->prev = temp;
+        head = ptr;
+        ptr = ptr->prev;
     }
-    head = ptr1;
     return head;
 }
 
