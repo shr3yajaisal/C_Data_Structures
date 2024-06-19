@@ -212,6 +212,25 @@ node* DeletionInBetween(node* head, int pos)
     return head;
 }
 
+node* ReversalOfList(node* head)
+{
+    node* ptr1 = head;
+    node* ptr2 = ptr1->next;
+
+    ptr1->next = NULL;
+    ptr1->prev = ptr2;
+
+    while(ptr2 != NULL)
+    {
+        ptr2->prev = ptr2->next;
+        ptr2->next = ptr1;
+        ptr1 = ptr2;
+        ptr2 = ptr2->prev;
+    }
+    head = ptr1;
+    return head;
+}
+
 void display(node* head)
 {
     node* ptr = head;
@@ -266,9 +285,10 @@ int main()
         printf("Enter 4 to delete the node from beginning\n");
         printf("Enter 5 to delete the node from the end\n");
         printf("Enter 6 to Delete the node in between\n");
-        printf("Enter 7 to display the list\n");
-        printf("Enter 8 to count the total nubmer of nodes in the list\n");
-        printf("Enter 9 to exit\n");
+        printf("Enter 7 to reverse the linked list\n");
+        printf("Enter 8 to display the list\n");
+        printf("Enter 9 to count the total nubmer of nodes in the list\n");
+        printf("Enter 10 to exit\n");
 
         printf("Enter your option- ");
         scanf("%d", &op);
@@ -295,6 +315,9 @@ int main()
             break;
 
             case 3:
+            printf("Enter the position at which you want to enter the element: ");
+            scanf("%d", &pos);
+
             if(pos < 1 || pos > c)
             {
                 printf("Invalid position!\n");
@@ -302,8 +325,6 @@ int main()
 
             else
             {
-                printf("Enter the position at which you want to enter the element: ");
-                scanf("%d", &pos);
                 printf("Enter the element you want to enter: ");
                 scanf("%d", &val);
                 head = InsertInBetween(head, pos, val);
@@ -334,15 +355,19 @@ int main()
             break;
 
             case 7:
-            display(head);
+            head = ReversalOfList(head);
             break;
 
             case 8:
+            display(head);
+            break;
+
+            case 9:
             c = count(head);
             printf("Total number of nodes in the list are: %d", c);
             break;
 
-            case 9:
+            case 10:
             exit(1);
 
             default:
