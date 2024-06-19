@@ -1,6 +1,5 @@
 # INTRODUCTION
-  Welcome to my GitHub repository containing various data structure programs. This collection is designed to help understand and implement fundamental data structures in C programming         languages. This repository is a compilation of programs implementing a variety of data structures. Each data structure is implemented in C programming languages to provide a broad 
-  understanding and to cater to the preferences of different developers.
+  Welcome to my GitHub repository containing various data structure programs. This repository is a compilation of programs implementing a variety of data structures. Each data structure is implemented in C programming languages to provide a broad understanding and to cater to the preferences of different developers.
 
 # DATA STRUCTURES INCLUDED- 
   This repository contains the following data structures- 
