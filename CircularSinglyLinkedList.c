@@ -27,13 +27,20 @@ node* InsertAtBeginning(node* tail, int val)
 
 void display(node* tail)
 {
-    node* temp = tail;
-    node* ptr = tail;
-   
-    while(ptr != temp)
+    if(tail == NULL)
     {
-        printf("%d\n", ptr->data);
-        ptr = ptr->link;
+        printf("Linked list is empty\n");
+    }
+    else
+    {
+        node* ptr = tail;
+
+        while(ptr->link != tail)
+        {
+            printf("%d\n", ptr->data);
+            ptr = ptr->link;
+        }
+       printf("%d\n", ptr->data);
     }
 }
 
