@@ -7,15 +7,6 @@ typedef struct node
     struct node* link;
 }node;
 
-node* AddToEmpty(node* tail, int val)
-{
-    node* temp = (node*)malloc(sizeof(node));
-    temp->data = val;
-    temp->link = temp;
-    tail = temp;
-    return tail;
-}
-
 int count(node* tail)
 {
     int c = 0;
@@ -62,7 +53,7 @@ void display(node* tail)
 {
     if(tail == NULL)
     {
-        printf("Linked list is already empty!\n");
+        printf("Linked list is empty!\n");
     }
     else
     {
@@ -129,10 +120,81 @@ node* InsertInBetween(node* tail, int pos, int val)
     return tail;
 }
 
+node* DeleteFromBeginning(node* tail)
+{
+    if(tail == NULL)
+    {
+        printf("Linked list is already empty!\n");
+    }
+    else
+    {
+        node* ptr = tail->link;
+        tail->link = ptr->link;
+        free(ptr);
+        ptr = NULL;
+    }
+
+    return tail;
+}
+
+node* DeleteFromEnd(node* tail)
+{
+    if(tail == NULL)
+    {
+        printf("Linked list is already Empty!\n");
+    }
+    else
+    {
+        node* ptr = tail;
+        node* temp = tail->link;
+        while(temp->link != tail)
+        {
+            temp = temp->link;
+        }
+        temp->link = ptr->link;
+        free(ptr);
+        ptr = NULL;
+        tail = temp;
+    }
+    return tail; 
+}
+
+node* DeleteInBetween(node* tail, int pos)
+{
+    
+}
+
+node* CreateList(node* tail)
+{
+    int n, val;
+    printf("Enter the number of nodes you want to enter: ");
+    scanf("%d", &n);
+
+    if(n == 0)
+    {
+        return tail;
+    }
+    else
+    {
+        printf("Enter the value for node 1: ");
+        scanf("%d", &val);
+        tail = InsertAtBeginning(tail, val);
+
+        for(int i=1; i<n; i++)
+        {
+            printf("Enter the value for node %d: ", i+1);
+            scanf("%d", &val);
+            tail = InsertAtEnd(tail, val);
+        }
+    }
+    return tail;
+}
+
 int main()
 {
     node* tail = (node*)malloc(sizeof(node));
     tail = NULL;
+    tail = CreateList(tail);
 
     int op, val, c, pos;
     while(1)
@@ -140,9 +202,11 @@ int main()
         printf("Enter 1 to Insert a node at beginning\n");
         printf("Enter 2 to Insert the node at the end\n");
         printf("Enter 3 to Insert a node in between two nodes\n");
-        printf("Enter 4 to count the number of nodes in the linked list\n");
-        printf("Enter 5 to print the linked list\n");
-        printf("Enter 6 to exit\n");
+        printf("Enter 4 to Delete the node from the beginning\n");
+        printf("Enter 5 to delete the node form the end\n");
+        printf("Enter 6 to count the number of nodes in the linked list\n");
+        printf("Enter 7 to print the linked list\n");
+        printf("Enter 8 to exit\n");
 
         printf("Enter your option: ");
         scanf("%d", &op);
@@ -178,15 +242,23 @@ int main()
             break;
 
             case 4:
+            tail = DeleteFromBeginning(tail);
+            break;
+
+            case 5:
+            tail = DeleteFromEnd(tail);
+            break;
+
+            case 6:
             c = count(tail);
             printf("Total number of nodes in the linked list are: %d\n", c);
             break;
 
-            case 5:
+            case 7:
             display(tail);
             break;
 
-            case 6:
+            case 8:
             exit(1);
             break;
 
