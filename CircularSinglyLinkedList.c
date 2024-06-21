@@ -29,18 +29,20 @@ void display(node* tail)
 {
     if(tail == NULL)
     {
-        printf("Linked list is empty\n");
+        printf("The linked list is empty!\n");
     }
+
     else
     {
-        node* ptr = tail;
+        node* ptr = tail->link;
+        printf("%d\n", ptr->data);
+        ptr = ptr->link;
 
-        while(ptr->link != tail)
+        while(ptr != tail->link)
         {
             printf("%d\n", ptr->data);
             ptr = ptr->link;
         }
-       printf("%d\n", ptr->data);
     }
 }
 
