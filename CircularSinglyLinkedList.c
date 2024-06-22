@@ -192,6 +192,41 @@ node* DeleteInBetween(node* tail, int pos)
     return tail;
 }
 
+void search(node* tail, int val)
+{
+    int c = 0;
+    if(tail == NULL)
+    {
+        printf("Linked list is empty!\n");
+    }
+    else
+    {
+        node* ptr = tail->link;
+        ptr = ptr->link;
+        if(ptr->data == val)
+        {
+            c++;
+        }
+
+        while(ptr != tail->link)
+        {
+            ptr = ptr->link;
+            if(ptr->data == val)
+            {
+                c++;
+            }
+        }
+    }
+    if(c == 0)
+    {
+        printf("The element is not in the linked list\n");
+    }
+    else
+    {
+        printf("Element found!\n");
+    }
+}
+
 node* CreateList(node* tail)
 {
     int n, val;
@@ -233,9 +268,10 @@ int main()
         printf("Enter 4 to Delete the node from the beginning\n");
         printf("Enter 5 to delete the node form the end\n");
         printf("Enter 6 to delete the node in between two nodes\n");
-        printf("Enter 7 to count the number of nodes in the linked list\n");
-        printf("Enter 8 to print the linked list\n");
-        printf("Enter 9 to exit\n");
+        printf("Enter 7 to search an element in the list\n");
+        printf("Enter 8 to count the number of nodes in the linked list\n");
+        printf("Enter 9 to print the linked list\n");
+        printf("Enter 10 to exit\n");
 
         printf("Enter your option: ");
         scanf("%d", &op);
@@ -293,15 +329,20 @@ int main()
             break;
 
             case 7:
+            printf("Enter the value you want to search in the linked list: ");
+            scanf("%d", &val);
+            search(tail, val);
+
+            case 8:
             c = count(tail);
             printf("Total number of nodes in the linked list are: %d\n", c);
             break;
 
-            case 8:
+            case 9:
             display(tail);
             break;
 
-            case 9:
+            case 10:
             exit(1);
             break;
 
