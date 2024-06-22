@@ -161,7 +161,35 @@ node* DeleteFromEnd(node* tail)
 
 node* DeleteInBetween(node* tail, int pos)
 {
-    node* 
+    int c = count(tail);
+    if(tail == NULL)
+    {
+        printf("Linked list is already empty!\n");
+    }
+    else if(pos == 1)
+    {
+        tail = DeleteFromBeginning(tail);
+    }
+    else if(pos == c)
+    {
+        tail = DeleteFromEnd(tail);
+    }
+    else
+    {
+        node* ptr1 = tail->link;
+        node* ptr2 = NULL;
+
+        while(pos != 1)
+        {
+            ptr2 = ptr1;
+            pos--;
+            ptr1 = ptr1->link;
+        }
+        ptr2->link = ptr1->link;
+        free(ptr1);
+        ptr1 = NULL;
+    }
+    return tail;
 }
 
 node* CreateList(node* tail)
@@ -204,9 +232,10 @@ int main()
         printf("Enter 3 to Insert a node in between two nodes\n");
         printf("Enter 4 to Delete the node from the beginning\n");
         printf("Enter 5 to delete the node form the end\n");
-        printf("Enter 6 to count the number of nodes in the linked list\n");
-        printf("Enter 7 to print the linked list\n");
-        printf("Enter 8 to exit\n");
+        printf("Enter 6 to delete the node in between two nodes\n");
+        printf("Enter 7 to count the number of nodes in the linked list\n");
+        printf("Enter 8 to print the linked list\n");
+        printf("Enter 9 to exit\n");
 
         printf("Enter your option: ");
         scanf("%d", &op);
@@ -251,14 +280,28 @@ int main()
 
             case 6:
             c = count(tail);
-            printf("Total number of nodes in the linked list are: %d\n", c);
+            printf("Enter the position from which you want to delete the node: ");
+            scanf("%d", &pos);
+            if(pos < 1 || pos > c)
+            {
+                printf("Invalid position!\n");
+            }
+            else
+            {
+                tail = DeleteInBetween(tail, pos);
+            }
             break;
 
             case 7:
-            display(tail);
+            c = count(tail);
+            printf("Total number of nodes in the linked list are: %d\n", c);
             break;
 
             case 8:
+            display(tail);
+            break;
+
+            case 9:
             exit(1);
             break;
 
