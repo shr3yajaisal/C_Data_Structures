@@ -161,7 +161,7 @@ node* DeleteFromEnd(node* tail)
 
 node* DeleteInBetween(node* tail, int pos)
 {
-    
+    node* 
 }
 
 node* CreateList(node* tail)
