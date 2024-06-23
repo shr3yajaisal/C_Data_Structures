@@ -109,6 +109,80 @@ node* InsertInBetween(node* tail, int pos, int val)
     return tail;
 }
 
+node* DeleteFromBeginning(node* tail)
+{
+    if(tail == NULL)
+    {
+        printf("Linked list is already empty!\n");
+    }
+    else
+    {
+        node* ptr = tail->next;
+        tail->next = ptr->next;
+        ptr->next->prev = tail;
+        free(ptr);
+        ptr = NULL;
+    }
+    return tail;
+}
+
+node* DeleteFromEnd(node* tail)
+{
+    if(tail == NULL)
+    {
+        printf("Linked list is already empty!\n");
+    }
+    else
+    {
+        node* ptr1 = tail->next;
+        node* ptr2 = NULL;
+        while(ptr1 != tail)
+        {
+            ptr2 = ptr1;
+            ptr1 = ptr1->next;
+        }
+        ptr2->next = tail->next;
+        tail->next->prev = ptr2;
+        free(ptr1);
+        ptr1 = NULL;
+        tail = ptr2;
+    }
+    return tail;
+}
+
+node* DeleteInBetween(node* tail, int pos)
+{
+    int c = count(tail);
+    if(tail == NULL)
+    {
+        printf("Linked list is already empty!\n");
+    }
+    else if(pos == 1)
+    {
+        tail = DeleteFromBeginning(tail);
+    }
+    else if(pos == c)
+    {
+        tail = DeleteFromEnd(tail);
+    }
+    else
+    {
+        node* ptr1 = tail->next;
+        node* ptr2 = NULL;
+        while(pos != 1)
+        {
+            pos--;
+            ptr2 = ptr1;
+            ptr1 = ptr1->next;
+        }
+        ptr2->next = ptr1->next;
+        ptr1->next->prev = ptr2;
+        free(ptr1);
+        ptr1 = NULL;
+    }
+    return tail;
+}
+
 void display(node* tail)
 {
     if(tail == NULL)
@@ -140,9 +214,12 @@ int main()
         printf("Enter 1 to Insert a node at the beginning\n");
         printf("Enter 2 to Insert a node at the end\n");
         printf("Enter 3 to Insert a node in between two nodes\n");
-        printf("Enter 4 to count the total number of nodes\n");
-        printf("Enter 5 to print the linked list\n");
-        printf("Enter 6 to exit\n");
+        printf("Enter 4 to delete the node from the beginning\n");
+        printf("Enter 5 to delete the node from the end\n");
+        printf("Enter 6 to delete the node in between two nodes\n");
+        printf("Enter 7 to count the total number of nodes\n");
+        printf("Enter 8 to print the linked list\n");
+        printf("Enter 9 to exit\n");
 
         printf("Enter your option: ");
         scanf("%d", &op);
@@ -178,14 +255,40 @@ int main()
             break;
 
             case 4:
-            printf("Total number of nodes are: %d", count(tail));
+            tail = DeleteFromBeginning(tail);
             break;
 
             case 5:
-            display(tail);
+            tail = DeleteFromEnd(tail);
             break;
 
             case 6:
+            c = count(tail);
+            printf("Enter the position from which you want to delete the node: ");
+            scanf("%d", &pos);
+            if(tail == NULL)
+            {
+                printf("Linked list is already empty!\n");
+            }
+            else if(pos < 1 || pos > c)
+            {
+                printf("Wrong position!\n");
+            }
+            else
+            {
+                tail = DeleteInBetween(tail, pos);
+            }
+            break;
+
+            case 7:
+            printf("Total number of nodes are: %d", count(tail));
+            break;
+
+            case 8:
+            display(tail);
+            break;
+
+            case 9:
             exit(1);
             break;
 
