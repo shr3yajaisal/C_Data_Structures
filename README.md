@@ -8,20 +8,29 @@
      - Singly linked list
      - Doubly linked list
      - Circular linked list
-  3. Stacks
-  4. Queues-
+  3. Application of Linked list-
+     - Polynomial addition
+     - Multiplication of two polynomials
+     - Addition of two numbers
+  4. Stacks-
+     - Array implementation of stack
+     - Linked list implementation of stack
+  5. Application of stack-
+     - Nested brackets
+     - Infix to Postfix
+  6. Queues-
      - single sided queue
      - doubly sided queue
      - circular queue
-  5. Trees-
+  7. Trees-
      - Binary Tree
      - Binary Search Tree
      - AVL Tree
      - Red-Black Tree
-  6. Graphs-
+  8. Graphs-
      - Graph representations (Adjacent Matrix, Adjacent List)
      - Graph Traversals (Breadth First Search, Depth First Search)
-  7. Heaps-
+  9. Heaps-
      - Minimum heap
      - Maximum heap
-  8. Hash Tables
+  10. Hash Tables
