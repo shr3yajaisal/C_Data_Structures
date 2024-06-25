@@ -104,6 +104,32 @@ node* InsertInBetween(node *head, int pos, int val)
     return head;
 }
 
+node* InsertionInSorted(node* head, int val)
+{
+    node* temp = (node*)malloc(sizeof(node));
+    temp->data = val;
+    int key = val;
+    temp->link = NULL;
+
+    node* ptr = head;
+
+    if(head == NULL || key < head->data)
+    {
+        temp->link = head;
+        head = temp;
+    }
+    else
+    {
+        while(ptr->link != NULL && ptr->link->data < key)
+        {
+            ptr = ptr->link;
+        }
+        temp->link = ptr->link;
+        ptr->link = temp;
+    }
+    return head;
+}
+
 void DeleteFromBeginning(node **head)
 {
     if(head == NULL)
@@ -242,14 +268,15 @@ int main()
         printf("Enter 1 to Insert a node at beginning\n");
         printf("Enter 2 to Insert a node at the end\n");
         printf("Enter 3 to Insert a node in between two nodes\n");
-        printf("Enter 4 to delete a node from the beginning\n");
-        printf("Enter 5 to delete a node from the end\n");
-        printf("Enter 6 to delete a node in between\n");
-        printf("Enter 7 to delete the whole linked list\n");
-        printf("Enter 8 to reverse the linked list\n");
-        printf("Enter 9 to count the total nubmer of nodes in the list\n");
-        printf("Enter 10 to display the list\n");
-        printf("Enter 11 to exit\n");
+        printf("Enter 4 to Insert an element in the sorted sinlgy linked list\n");
+        printf("Enter 5 to delete a node from the beginning\n");
+        printf("Enter 6 to delete a node from the end\n");
+        printf("Enter 7 to delete a node in between\n");
+        printf("Enter 8 to delete the whole linked list\n");
+        printf("Enter 9 to reverse the linked list\n");
+        printf("Enter 10 to count the total nubmer of nodes in the list\n");
+        printf("Enter 11 to display the list\n");
+        printf("Enter 12 to exit\n");
 
         printf("Enter your option- ");
         scanf("%d", &op);
@@ -285,35 +312,41 @@ int main()
             break;
 
             case 4:
-            DeleteFromBeginning(&head);
+            printf("Enter the value you want to insert: ");
+            scanf("%d", &val);
+            head = InsertionInSorted(head, val);
             break;
 
             case 5:
-            DeleteFromEnd(head);
+            DeleteFromBeginning(&head);
             break;
 
             case 6:
-            DeleteInBetween(head);
+            DeleteFromEnd(head);
             break;
 
             case 7:
-            DeleteList(head);
+            DeleteInBetween(head);
             break;
 
             case 8:
-            head = ReversingList(head);
+            DeleteList(head);
             break;
 
             case 9:
+            head = ReversingList(head);
+            break;
+
+            case 10:
             c = CountNodes(head);
             printf("Total number of node are: %d\n", c);
             break;
 
-            case 10:
+            case 11:
             PrintData(head);
             break;
 
-            case 11:
+            case 12:
             exit(1);
             break;
 
