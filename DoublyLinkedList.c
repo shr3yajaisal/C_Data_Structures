@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//creation of node
 typedef struct node
 {
     int data;
