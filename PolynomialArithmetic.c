@@ -1,1 +1,91 @@
+#include <stdio.h>
+#include <stdlib.h>
 
+typedef struct node
+{
+    int coefficient;
+    int exponent;
+    struct node* link;
+}node;
+
+node* insert(node* head, int coeff, int expo)
+{
+    node* ptr = (node*)malloc(sizeof(node));
+    ptr->coefficient = coeff;
+    ptr->exponent = expo;
+    ptr->link = NULL;
+
+    if(head == NULL || expo > head->exponent)
+    {
+        ptr->link = head;
+        head = ptr;
+    }
+
+    else
+    {
+        node* temp = head;
+        while(temp->link != NULL && temp->link->exponent > expo)
+        {
+            temp = temp->link;
+        }
+        ptr->link = temp->link;
+        temp->link = ptr;
+    }
+    return head;
+}
+
+node* create (node* head)
+{
+    int n;
+    int i;
+    int coeff;
+    int expo;
+    printf("Enter the number of terms: ");
+    scanf("%d", &n);
+
+    for (i=0; i<n; i++)
+    {
+        printf("Enter the coefficient for term %d: ", i+1);
+        scanf("%d", &coeff);
+        printf("Enter the exponent for the term %d: ", i+1);
+        scanf("%d", &expo);
+        head = insert(head, coeff, expo);
+    }
+    return head;
+}
+
+void display (node* head)
+{
+    if(head == NULL)
+    {
+        printf("Linked list is empty!\n");
+    }
+    else
+    {
+        node *ptr = head;
+        while(ptr != NULL)
+        {
+            printf("%dx^(%d)", ptr->coefficient, ptr->exponent);
+            ptr = ptr->link;
+            if(ptr != NULL)
+            {
+                printf("+");
+            }
+            else
+            {
+                printf("\n");
+            }
+        }
+    }
+}
+
+int main()
+{
+    node* head = (node*)malloc(sizeof(node));
+    head = NULL;
+    printf("Enter the first polynomial:\n"); 
+    head = create(head);
+    display(head);
+
+    return 0;
+}
