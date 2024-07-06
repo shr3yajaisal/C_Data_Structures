@@ -171,6 +171,8 @@ void PolyMultiply (node* head1, node* head2)
 
 int main()
 {
+    int op;
+
     node* head1 = (node*)malloc(sizeof(node));
     head1 = NULL;
     printf("Enter the first polynomial:\n"); 
@@ -183,8 +185,33 @@ int main()
     head2 = create(head2);
     display(head2);
 
-    PolyAddition(head1, head2);
-    PolyMultiply(head1, head2);
+    while(1)
+    {
+        printf("Enter 1 to add the polynomials\n");
+        printf("Enter 2 to multiply the polynomials\n");
+        printf("Enter 3 to exit\n");
+
+        printf("Enter your option: ");
+        scanf("%d", &op);
+
+        switch(op)
+        {
+            case 1:
+            PolyAddition(head1, head2);
+            break;
+
+            case 2:
+            PolyMultiply(head1, head2);
+            break;
+
+            case 3:
+            exit(1);
+
+            default:
+            printf("Wrong input\n");
+            break;
+        }
+    }
 
     return 0;
 }
