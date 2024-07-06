@@ -34,6 +34,27 @@ node* insert(node* head, int coeff, int expo)
     return head;
 }
 
+void simplification(node* head)
+{
+    node* temp = NULL;
+    node* ptr = head;
+    while(ptr->link != NULL)
+    {
+        if(ptr->exponent == ptr->link->exponent)
+        {
+            ptr->coefficient = ptr->coefficient + ptr->link->coefficient;
+            temp = ptr->link;
+            ptr->link = ptr->link->link; 
+            free(temp);
+            temp = NULL;
+        }
+        else
+        {
+            ptr = ptr->link;
+        }
+    }
+}
+
 node* create (node* head)
 {
     int n;
@@ -51,6 +72,7 @@ node* create (node* head)
         scanf("%d", &expo);
         head = insert(head, coeff, expo);
     }
+    simplification(head);
     return head;
 }
 
@@ -116,6 +138,7 @@ void PolyAddition (node* head1, node* head2)
         head3 = insert(head3, ptr2->coefficient, ptr2->exponent);
         ptr2 = ptr2->link;
     }
+    simplification(head3);
     printf("Added polynomial is: ");
     display(head3);
 }
@@ -141,6 +164,7 @@ void PolyMultiply (node* head1, node* head2)
         ptr1 = ptr1->link;
         ptr2 = head2;
     }
+    simplification(head3);
     printf("Polynomial multiplication: ");
     display(head3);
 }
