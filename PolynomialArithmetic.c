@@ -10,6 +10,7 @@ typedef struct node
 
 node* insert(node* head, int coeff, int expo)
 {
+    node* temp = head;
     node* ptr = (node*)malloc(sizeof(node));
     ptr->coefficient = coeff;
     ptr->exponent = expo;
@@ -23,7 +24,6 @@ node* insert(node* head, int coeff, int expo)
 
     else
     {
-        node* temp = head;
         while(temp->link != NULL && temp->link->exponent > expo)
         {
             temp = temp->link;
@@ -79,13 +79,62 @@ void display (node* head)
     }
 }
 
+void PolyAddition (node* head1, node* head2)
+{
+    node* ptr1 = head1;
+    node* ptr2 = head2;
+    node* head3 = NULL;
+
+    while(ptr1 != NULL && ptr2 != NULL)
+    {
+        if(ptr1->exponent == ptr2->exponent)
+        {
+            head3 = insert(head3, ptr1->coefficient + ptr2->coefficient, ptr1->exponent);
+            ptr1 = ptr1->link;
+            ptr2 = ptr2->link;
+        }
+
+        else if(ptr1->exponent > ptr2->exponent)
+        {
+            head3 = insert(head3, ptr1->coefficient, ptr1->exponent);
+            ptr1 = ptr1->link;
+        }
+
+        else if(ptr1->exponent < ptr2->exponent)
+        {
+            head3 = insert(head3, ptr2->coefficient, ptr2->exponent);
+            ptr2 = ptr2->link;
+        }
+    }
+    while(ptr1 != NULL)
+    {
+        head3 = insert(head3, ptr1->coefficient, ptr1->exponent);
+        ptr1 = ptr1->link;
+    }
+    while(ptr2 != NULL)
+    {
+        head3 = insert(head3, ptr2->coefficient, ptr2->exponent);
+        ptr2 = ptr2->link;
+    }
+    printf("Added polynomial is: ");
+    display(head3);
+}
+
 int main()
 {
-    node* head = (node*)malloc(sizeof(node));
-    head = NULL;
+    node* head1 = (node*)malloc(sizeof(node));
+    head1 = NULL;
     printf("Enter the first polynomial:\n"); 
-    head = create(head);
-    display(head);
+    head1 = create(head1);
+    display(head1);
+
+    node* head2 = (node*)malloc(sizeof(node));
+    head2 = NULL;
+    printf("Enter the second polynomial:\n"); 
+    head2 = create(head2);
+    display(head2);
+
+    PolyAddition(head1, head2);
 
     return 0;
 }
