@@ -120,6 +120,31 @@ void PolyAddition (node* head1, node* head2)
     display(head3);
 }
 
+void PolyMultiply (node* head1, node* head2)
+{
+    node* ptr1 = head1;
+    node* ptr2 = head2;
+    node* head3 = NULL;
+
+    if(head1 == NULL || head2 == NULL)
+    {
+        printf("0\n");
+    }
+
+    while(ptr1 != NULL)
+    {
+        while(ptr2 != NULL)
+        {
+            head3 = insert(head3, (ptr1->coefficient) * (ptr2->coefficient), (ptr1->exponent) + (ptr2->exponent));
+            ptr2 = ptr2->link;
+        }
+        ptr1 = ptr1->link;
+        ptr2 = head2;
+    }
+    printf("Polynomial multiplication: ");
+    display(head3);
+}
+
 int main()
 {
     node* head1 = (node*)malloc(sizeof(node));
@@ -135,6 +160,7 @@ int main()
     display(head2);
 
     PolyAddition(head1, head2);
+    PolyMultiply(head1, head2);
 
     return 0;
 }
