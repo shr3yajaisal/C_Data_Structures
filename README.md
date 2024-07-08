@@ -10,7 +10,6 @@
      - Circular linked list
   3. Application of Linked list-
      - Polynomial arithmetic
-     - Multiplication of two polynomials
      - Addition of two numbers
   4. Stacks-
      - Array implementation of stack
