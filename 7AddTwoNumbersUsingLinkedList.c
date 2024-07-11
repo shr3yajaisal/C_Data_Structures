@@ -52,7 +52,6 @@ node* addition(node* head1, node* head2)
     }
 }
 
-//to print the number
 void print(node* head)
 {
     node* ptr = head;
