@@ -7,7 +7,6 @@ typedef struct node
     struct node* link;
 }node;
 
-//to convert the number into a linked list of digits of the number
 node* digit(node* head, int dig)
 {
     node* temp = (node*)malloc(sizeof(node));
