@@ -38,7 +38,6 @@ node* reverse(node* head)
     return head;
 }
 
-//for addition of two numbers
 node* addition(node* head1, node* head2)
 {
     int n, carry;
