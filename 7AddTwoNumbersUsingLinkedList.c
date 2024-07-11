@@ -18,7 +18,6 @@ node* digit(node* head, int dig)
     return head;
 }
 
-//to reverse the linked list
 node* reverse(node* head)
 {
     if(head == NULL)
