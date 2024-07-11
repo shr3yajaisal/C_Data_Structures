@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//creation of a node
 typedef struct node
 {
     int digit;
