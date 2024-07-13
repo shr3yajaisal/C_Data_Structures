@@ -40,16 +40,41 @@ node* reverse(node* head)
 
 node* addition(node* head1, node* head2)
 {
-    int n, carry;
     node* ptr1 = head1;
     node* ptr2 = head2;
     node* head3 = NULL;
 
+    int sum = 0, carry = 0;
+
     while(ptr1 != NULL || ptr2 != NULL)
     {
-        n = ptr1->digit + ptr2->digit;
-        carry = n%
+
+        sum = 0;
+        if(ptr1 == NULL)
+        {
+            sum = 0;
+        }
+        else
+        {
+            sum = sum + ptr1->digit;
+        }
+        if(ptr2 == NULL)
+        {
+            sum = 0;
+        }
+        else
+        {
+            sum = sum + ptr2->digit;
+        }
+        sum = sum + carry;
+        carry = 0;
+        carry = sum/10;
+        sum = sum%10;;
+        head3 = digit(head3, sum);
+        ptr1 = ptr1->link;
+        ptr2 = ptr2->link;
     }
+    return head3;
 }
 
 void print(node* head)
@@ -76,6 +101,9 @@ int main()
     node* head2 = (node*)malloc(sizeof(node));
     head2 = NULL;
 
+    node* head3 = (node*)malloc(sizeof(node));
+    head3 = NULL;
+
     printf("Enter the first number: ");
     scanf("%d", &n1);
 
@@ -89,7 +117,6 @@ int main()
     }
     print(head1);
     printf("\n");
-    reverse(head1);
 
     while(n2 != 0)
     {
@@ -97,7 +124,7 @@ int main()
         n2 = n2/10;
     }
     print(head2);
-    reverse(head2);
+    printf("\n");
 
     return 0;
 }
