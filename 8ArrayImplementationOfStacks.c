@@ -5,9 +5,33 @@
 int stack[MAX];
 int top = -1;
 
-void push(int data)
+int IsFull()
 {
     if(top == MAX - 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int IsEmpty()
+{
+    if(top == -1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+void push(int data)
+{
+    if(IsFull())
     {
         printf("Stack overflow!\n");
     }
@@ -20,7 +44,7 @@ void push(int data)
 
 int pop()
 {
-    if(top == -1)
+    if(IsEmpty()) 
     {
         printf("Stack underflow!\n");
     }
