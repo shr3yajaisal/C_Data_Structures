@@ -38,42 +38,34 @@ node* reverse(node* head)
     return head;
 }
 
-node* addition(node* head1, node* head2)
-{
+node* addition(node* head1, node* head2) {
+    head1 = reverse(head1);
+    head2 = reverse(head2);
+
     node* ptr1 = head1;
     node* ptr2 = head2;
     node* head3 = NULL;
 
     int sum = 0, carry = 0;
 
-    while(ptr1 != NULL || ptr2 != NULL)
+    while (ptr1 != NULL || ptr2 != NULL || carry != 0) 
     {
-
-        sum = 0;
-        if(ptr1 == NULL)
+        sum = carry;
+        if (ptr1 != NULL) 
         {
-            sum = 0;
+            sum += ptr1->digit;
+            ptr1 = ptr1->link;
         }
-        else
+        if (ptr2 != NULL) 
         {
-            sum = sum + ptr1->digit;
+            sum += ptr2->digit;
+            ptr2 = ptr2->link;
         }
-        if(ptr2 == NULL)
-        {
-            sum = 0;
-        }
-        else
-        {
-            sum = sum + ptr2->digit;
-        }
-        sum = sum + carry;
-        carry = 0;
-        carry = sum/10;
-        sum = sum%10;;
+        carry = sum / 10;
+        sum = sum % 10;
         head3 = digit(head3, sum);
-        ptr1 = ptr1->link;
-        ptr2 = ptr2->link;
     }
+
     return head3;
 }
 
@@ -125,6 +117,10 @@ int main()
     }
     print(head2);
     printf("\n");
+
+    printf("Sum of the numbers is: ");
+    head3 = addition(head1, head2);
+    print(head3);
 
     return 0;
 }
