@@ -62,3 +62,22 @@ int pre_order_traversal(treenode* root)
     return 0;
 }
 
+int post_order_traversal(treenode* root)
+{
+    if(root != NULL)
+    {
+        post_order_traversal(root->left);
+        post_order_traversal(root->right);
+        printf("%d\n", root->data);
+    }
+    return 0;
+}
+
+int main()
+{
+    binarytree tree;
+    tree.root = NULL;
+
+    tree.root = insertnode(tree.root,5);
+    tree.root = insertnode(tree.root, 7);
+}
