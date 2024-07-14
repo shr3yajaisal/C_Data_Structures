@@ -21,3 +21,21 @@ treenode* createtreenode(int data)
     newnode->right = NULL;
     return newnode;
 }
+
+treenode* insertnode(treenode *root, int val)
+{
+    if(root == NULL)
+    {
+        return createtreenode(val);
+    }
+
+    if(val < root->data)
+    {
+        root->left = insertnode(root->left, val);
+    }
+    else if(val > root->data)
+    {
+        root->right = insertnode(root->right, val);
+    }
+    return root;
+}
