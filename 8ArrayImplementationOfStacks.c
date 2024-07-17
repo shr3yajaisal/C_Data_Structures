@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #define MAX 4
 
 int stack[MAX];
@@ -108,6 +109,5 @@ int main()
             break;
         }
     }
-    
     return 0;
 }
