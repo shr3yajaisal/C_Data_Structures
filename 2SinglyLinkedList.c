@@ -7,16 +7,14 @@ typedef struct node
     struct node *link;
 }node;
 
-node* AddToEmpty(node *head, int val)
-{
+node* AddToEmpty(node *head, int val){
     head = (node*)malloc(sizeof(node));
     head->data = val;
     head->link = NULL;
     return head;
 }
 
-int CountNodes(node *head)
-{
+int CountNodes(node *head){
     int count = 0;
     node *ptr = head;
     while(ptr != NULL)
@@ -28,8 +26,7 @@ int CountNodes(node *head)
     return count;
 }
 
-void PrintData(node *head)
-{
+void PrintData(node *head){
     if(head == NULL)
     {
         printf("Linked list is empty!\n");
@@ -46,8 +43,7 @@ void PrintData(node *head)
     }
 }
 
-node* InsertAtEnd(node *head, int val)
-{
+node* InsertAtEnd(node *head, int val){
     node *ptr = head;
     node *temp = (node*)malloc(sizeof(node));
     temp->data = val;
@@ -61,8 +57,7 @@ node* InsertAtEnd(node *head, int val)
     return head;
 }
 
-node* InsertAtBeginning(node *head, int val)
-{
+node* InsertAtBeginning(node *head, int val){
     node *ptr = (node*)malloc(sizeof(node));
     ptr->data = val;
     ptr->link = head;
@@ -71,8 +66,7 @@ node* InsertAtBeginning(node *head, int val)
     return head;
 }
 
-node* InsertInBetween(node *head, int pos, int val)
-{
+node* InsertInBetween(node *head, int pos, int val){
     int c = CountNodes(head);
 
     node *ptr = head;
@@ -104,8 +98,7 @@ node* InsertInBetween(node *head, int pos, int val)
     return head;
 }
 
-node* InsertionInSorted(node* head, int val)
-{
+node* InsertionInSorted(node* head, int val){
     node* temp = (node*)malloc(sizeof(node));
     temp->data = val;
     int key = val;
@@ -130,8 +123,7 @@ node* InsertionInSorted(node* head, int val)
     return head;
 }
 
-void DeleteFromBeginning(node **head)
-{
+void DeleteFromBeginning(node **head){
     if(head == NULL)
     {
         printf("Linked list is already empty!\n");
@@ -145,8 +137,7 @@ void DeleteFromBeginning(node **head)
     }
 }
 
-void DeleteFromEnd(node *head)
-{
+void DeleteFromEnd(node *head){
     if(head == NULL)
     {
         printf("Linked list is already empty!");
@@ -173,8 +164,7 @@ void DeleteFromEnd(node *head)
     } 
 }
 
-void DeleteInBetween(node* head)
-{
+void DeleteInBetween(node* head){
     int pos;
     node *ptr1 = head;
     node *ptr2 = NULL;
@@ -201,8 +191,7 @@ void DeleteInBetween(node* head)
     }
 }
 
-node* DeleteList(node* head)
-{
+node* DeleteList(node* head){
     node* temp = head;
     while(temp != NULL)
     {
@@ -213,8 +202,7 @@ node* DeleteList(node* head)
     return head;
 }
 
-node* CreateList(node* head)
-{
+node* CreateList(node* head){
     int n, val;
     printf("Enter the number of nodes you want to create: ");
     scanf("%d", &n);
@@ -239,8 +227,7 @@ node* CreateList(node* head)
     return head;
 }
 
-node* ReversingList(node* head)
-{
+node* ReversingList(node* head){
     node *prev = NULL;
     node* next = NULL;
 
@@ -255,8 +242,7 @@ node* ReversingList(node* head)
     return head;
 }
 
-int main()
-{
+int main(){
     node* head = (node*)malloc(sizeof(node));
     head = NULL;
 
