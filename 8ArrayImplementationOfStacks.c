@@ -18,3 +18,17 @@ void push(int data)
     }
 }
 
+int pop()
+{
+    int value;
+    if(top == -1)
+    {
+        printf("Stack underflow\n");
+    }
+    else
+    {
+        value = stack[top];
+        top = top - 1;
+    }
+    return value;
+}
