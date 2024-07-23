@@ -44,16 +44,15 @@ void push(int data)
 
 int pop()
 {
-    int value;
+    
     if(IsEmpty()) 
     {
         printf("Stack underflow!\n");
     }
-    else
-    {
-        value = stack[top];
-        top = top - 1;
-    } 
+    int value;
+    value = stack[top];
+    top = top - 1;
+    
     return value;
 }
 
