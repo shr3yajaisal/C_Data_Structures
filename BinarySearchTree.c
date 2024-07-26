@@ -40,6 +40,17 @@ treenode* insertnode(treenode *root, int val)
     return root;
 }
 
+int in_order_traversal(treenode* root)
+{
+    if(root != NULL)
+    {
+        in_order_traversal(root->left);
+        printf("%d\n", root->data);
+        in_order_traversal(root->right);
+    }
+    return 0;
+}
+
 
 int pre_order_traversal(treenode* root)
 {
