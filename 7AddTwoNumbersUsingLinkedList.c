@@ -18,6 +18,7 @@ node* digit(node* head, int dig)
     return head;
 }
 
+
 node* reverse(node* head)
 {
     if(head == NULL)
