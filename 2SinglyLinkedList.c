@@ -15,6 +15,7 @@ node* AddToEmpty(node *head, int val)
     return head;
 }
 
+
 int CountNodes(node *head)
 {
     int count = 0;
