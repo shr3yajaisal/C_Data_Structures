@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #define MAX 4
 
+
 int stack[MAX];
 int top = -1;
 
